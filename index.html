@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CurlWise - AI-Powered Care for Your Unique Curls</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #e8d5ff 0%, #f3e8ff 50%, #fef3c7 100%);
+            color: #4c1d95;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section - Full Screen */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20 T80,20" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" fill="none"/><path d="M15,40 Q25,30 35,40 T55,40 T75,40" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" fill="none"/><path d="M25,60 Q35,50 45,60 T65,60 T85,60" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" fill="none"/></svg>');
+            animation: curlFlow 8s ease-in-out infinite;
+        }
+
+        @keyframes curlFlow {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(-20px) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1.2s ease-out;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .cta-button {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cta-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #7c3aed;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+            background: white;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating curl shapes */
+        .floating-curls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .curl-shape {
+            position: absolute;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .curl-2a {
+            width: 100px;
+            height: 30px;
+            background: transparent;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px 50px 0 0;
+            border-bottom: none;
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .curl-3b {
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            top: 8%;
+            right: 25%;
+            animation-delay: -2s;
+        }
+
+        .curl-4a {
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50% 20% 50% 20%;
+            transform: rotate(45deg);
+            top: 40%;
+            left: 85%;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-35px) rotate(15deg);
+                opacity: 1;
+            }
+        }
+
+        /* Main Content Sections */
+        .content-section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #6b21a8;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: #7c2d92;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Upload Section */
+        .upload-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .questionnaire-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: left;
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .identity-section {
+            background: linear-gradient(135deg, #f3e8ff, #e8d5ff);
+        }
+
+        .journey-section {
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .lifestyle-section {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+        }
+
+        .hair-section {
+            background: linear-gradient(135deg, #d1fae5, #10b981);
+        }
+
+        .form-section h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-group {
+            margin-bottom: 2rem;
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .radio-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .radio-option:hover {
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+        }
+
+        /* Results styling */
+        .results-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 25px;
+            margin-top: 3rem;
+        }
+
+        /* About Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(124, 58, 237, 0.15);
+        }
+
+        .story-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+
+        /* Science Section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #4c1d95, #6b21a8);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(168, 85, 247, 0.1);
+            border-top: 4px solid #a855f7;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .story-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth Modal -->
+    <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10000; backdrop-filter: blur(5px);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border-radius: 25px; padding: 3rem; max-width: 450px; width: 90%; box-shadow: 0 25px 50px rgba(124, 58, 237, 0.3);">
+            <button onclick="closeAuthModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b21a8;">×</button>
+            
+            <!-- Sign In Form -->
+            <div id="signInForm">
+                <h3 style="color: #6b21a8; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;">Welcome Back! 💜</h3>
+                
+                <form onsubmit="signIn(event)">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: #6b21a8; font-weight: 600; margin-bottom: 0.5rem;">Email</label>
+                        <input type="email" id="signInEmail" required style="width: 100%; padding: 1rem; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 15px; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#a855f7'" onblur="this.style.borderColor='rgba(168, 85, 247, 0.3)'">
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: #6b21a8; font-weight: 600; margin-bottom: 0.5rem;">Password</label>
+                        <input type="password" id="signInPassword" required style="width: 100%; padding: 1rem; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 15px; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#a855f7'" onblur="this.style.borderColor='rgba(168, 85, 247, 0.3)'">
+                    </div>
+                    
+                    <button type="submit" style="width: 100%; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white; border: none; padding: 1rem; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        Sign In ✨
+                    </button>
+                </form>
+                
+                <p style="text-align: center; color: #7c2d92; margin-bottom: 1rem;">Don't have an account?</p>
+                <button onclick="showSignUp()" style="width: 100%; background: transparent; color: #7c3aed; border: 2px solid #a855f7; padding: 1rem; border-radius: 15px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                    Create Account
+                </button>
+            </div>
+            
+            <!-- Sign Up Form -->
+            <div id="signUpForm" style="display: none;">
+                <h3 style="color: #6b21a8; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 2rem; text-align: center;">Join the Curl Community! 🌟</h3>
+                
+                <form onsubmit="signUp(event)">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: #6b21a8; font-weight: 600; margin-bottom: 0.5rem;">Name</label>
+                        <input type="text" id="signUpName" required style="width: 100%; padding: 1rem; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 15px; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#a855f7'" onblur="this.style.borderColor='rgba(168, 85, 247, 0.3)'">
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; color: #6b21a8; font-weight: 600; margin-bottom: 0.5rem;">Email</label>
+                        <input type="email" id="signUpEmail" required style="width: 100%; padding: 1rem; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 15px; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#a855f7'" onblur="this.style.borderColor='rgba(168, 85, 247, 0.3)'">
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; color: #6b21a8; font-weight: 600; margin-bottom: 0.5rem;">Password</label>
+                        <input type="password" id="signUpPassword" required style="width: 100%; padding: 1rem; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 15px; font-size: 1rem; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#a855f7'" onblur="this.style.borderColor='rgba(168, 85, 247, 0.3)'">
+                    </div>
+                    
+                    <button type="submit" style="width: 100%; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white; border: none; padding: 1rem; border-radius: 15px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        Create Account 🌟
+                    </button>
+                </form>
+                
+                <p style="text-align: center; color: #7c2d92; margin-bottom: 1rem;">Already have an account?</p>
+                <button onclick="showSignIn()" style="width: 100%; background: transparent; color: #7c3aed; border: 2px solid #a855f7; padding: 1rem; border-radius: 15px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Menu -->
+    <div id="userMenu" style="display: none; position: fixed; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2); z-index: 1001; min-width: 250px;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(168, 85, 247, 0.2);">
+            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #7c3aed, #a855f7); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.2rem;" id="userAvatar">
+                <!-- User initials will go here -->
+            </div>
+            <div>
+                <div style="font-weight: 600; color: #6b21a8;" id="userName">User Name</div>
+                <div style="font-size: 0.9rem; color: #7c2d92;" id="userEmail">user@email.com</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+            <button onclick="viewProfile()" style="width: 100%; text-align: left; background: none; border: none; padding: 0.75rem; border-radius: 10px; cursor: pointer; color: #6b21a8; font-weight: 500; transition: background 0.3s;" onmouseover="this.style.background='rgba(168, 85, 247, 0.1)'" onmouseout="this.style.background='none'">
+                👤 View Profile
+            </button>
+            <button onclick="viewSavedResults()" style="width: 100%; text-align: left; background: none; border: none; padding: 0.75rem; border-radius: 10px; cursor: pointer; color: #6b21a8; font-weight: 500; transition: background 0.3s;" onmouseover="this.style.background='rgba(168, 85, 247, 0.1)'" onmouseout="this.style.background='none'">
+                📊 My Curl DNA Results
+            </button>
+            <button onclick="settings()" style="width: 100%; text-align: left; background: none; border: none; padding: 0.75rem; border-radius: 10px; cursor: pointer; color: #6b21a8; font-weight: 500; transition: background 0.3s;" onmouseover="this.style.background='rgba(168, 85, 247, 0.1)'" onmouseout="this.style.background='none'">
+                ⚙️ Settings
+            </button>
+        </div>
+        
+        <button onclick="signOut()" style="width: 100%; background: rgba(239, 68, 68, 0.1); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.75rem; border-radius: 10px; font-weight: 500; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.1)'">
+            🚪 Sign Out
+        </button>
+    </div>
+
+    <!-- Sign In Button (when logged out) -->
+    <button id="authButton" onclick="openAuthModal()" style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer; z-index: 1000; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        Sign In / Join ✨
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-curls">
+            <div class="curl-shape curl-2a"></div>
+            <div class="curl-shape curl-3b"></div>
+            <div class="curl-shape curl-4a"></div>
+        </div>
+        <div class="hero-content">
+            <h1>CurlWise</h1>
+            <p class="hero-tagline">Made for curls, backed by science, powered by you.</p>
+            <div class="hero-cta">
+                <a href="#analyze" class="cta-button cta-primary">Discover My Curl DNA</a>
+                <a href="#about" class="cta-button cta-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analyze Section -->
+    <section class="content-section" id="analyze">
+        <div class="container">
+            <div class="section-header">
+                <h2>Discover Your Curl DNA</h2>
+                <p>Your curls are part of your story. Let's explore your unique hair journey, identity, and goals to create a care plan that's truly yours.</p>
+            </div>
+
+            <div class="upload-container">
+                <!-- Curl DNA Questionnaire -->
+                <div id="questionnaire" class="questionnaire-form">
+                    <h3 style="text-align: center; color: #7c3aed; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Your Curl DNA Assessment ✨</h3>
+                    
+                    <form id="curlDnaForm">
+                        <!-- Identity & Background -->
+                        <div class="form-section identity-section">
+                            <h4 style="color: #6b21a8;">🌍 Your Identity & Background</h4>
+                            
+                            <div class="question-group">
+                                <label class="question-label" style="color: #6b21a8;">How old are you?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="age" value="teen" required>
+                                        <span>13-17 (Teen navigating identity)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="age" value="young-adult" required>
+                                        <span>18-25 (Young adult)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="age" value="adult" required>
+                                        <span>26-40 (Adult)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="age" value="parent" required>
+                                        <span>Parent of curly-haired child</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="question-group">
+                                <label class="question-label" style="color: #6b21a8;">How do you currently feel about your curls?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="feelings" value="love-them" required>
+                                        <span>I love my curls and want to enhance them! 💕</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="feelings" value="learning-to-love" required>
+                                        <span>I'm learning to love them after years of fighting them</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="feelings" value="frustrated" required>
+                                        <span>Frustrated - they never look good 😔</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="feelings" value="confused" required>
+                                        <span>Confused - I don't know what my hair wants</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="feelings" value="new-to-natural" required>
+                                        <span>New to natural - transitioning from relaxed/heat damage</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hair Journey & Goals -->
+                        <div class="form-section journey-section">
+                            <h4 style="color: #6b21a8;">💜 Your Hair Goals</h4>
+                            
+                            <div class="question-group">
+                                <label class="question-label" style="color: #6b21a8;">What's your main hair goal right now?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="goals" value="healthy-growth" required>
+                                        <span>Healthy growth and length retention</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="goals" value="definition" required>
+                                        <span>Better curl definition and less frizz</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="goals" value="low-maintenance" required>
+                                        <span>Low-maintenance routine that actually works</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="goals" value="confidence" required>
+                                        <span>Building confidence in my natural texture</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="goals" value="damage-repair" required>
+                                        <span>Repairing damage from heat/chemicals</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="question-group">
+                                <label class="question-label" style="color: #6b21a8;">How much time do you want to spend on hair?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="timeCommitment" value="minimal" required>
+                                        <span>Minimal - wash & go only (5-10 min)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="timeCommitment" value="moderate" required>
+                                        <span>Moderate - some styling (15-30 min)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="timeCommitment" value="detailed" required>
+                                        <span>Detailed - I enjoy the process (30+ min)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lifestyle & Environment -->
+                        <div class="form-section lifestyle-section">
+                            <h4 style="color: #92400e;">🌍 Your Lifestyle</h4>
+                            
+                            <div class="question-group">
+                                <label class="question-label" style="color: #92400e;">What's your climate like?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="climate" value="humid" required>
+                                        <span>Humid/tropical</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="climate" value="dry" required>
+                                        <span>Dry/desert</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="climate" value="temperate" required>
+                                        <span>Temperate/moderate</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="climate" value="cold" required>
+                                        <span>Cold/dry winters</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="question-group">
+                                <label class="question-label" style="color: #92400e;">What's your budget for hair products monthly?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="budget" value="low" required>
+                                        <span>Under $15 (Student/tight budget - DIY focus)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="budget" value="medium" required>
+                                        <span>$15-40 (Mix of drugstore & mid-range)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="budget" value="high" required>
+                                        <span>$40+ (Premium products & salon treatments)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hair Characteristics -->
+                        <div class="form-section hair-section">
+                            <h4 style="color: #065f46;">🌿 Quick Hair Check</h4>
+                            
+                            <div class="question-group">
+                                <label class="question-label" style="color: #065f46;">When your hair is wet and you scrunch it, what shape forms?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="curlPattern" value="2A-2B" required>
+                                        <span>Loose waves (2A-2B)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="curlPattern" value="2C-3A" required>
+                                        <span>Strong waves to loose curls (2C-3A)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="curlPattern" value="3B-3C" required>
+                                        <span>Springy curls to corkscrews (3B-3C)</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="curlPattern" value="4A-4C" required>
+                                        <span>Coils and tight textures (4A-4C)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="analyze-btn">
+                            Discover My Curl DNA ✨
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" style="display: none;">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+
+                <div style="background: rgba(168, 85, 247, 0.1); padding: 2rem; border-radius: 20px; border-left: 4px solid #a855f7; margin-top: 2rem;">
+                    <p style="margin: 0; font-style: italic; color: #6b21a8;">
+                        ✨ Your Curl DNA goes beyond just hair type - we consider your identity, journey, and goals to create a truly personalized experience that celebrates who you are.
+                    </p>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing your unique Curl DNA... ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Mission: Embracing Every Curl</h2>
+                <p>CurlWise was born from a simple belief: every person with textured hair deserves personalized care that actually works, without breaking the bank or endless trial and error.</p>
+            </div>
+            
+            <div class="story-grid">
+                <div class="story-card">
+                    <h3>Sahana's Story</h3>
+                    <p>After years of struggling with generic hair advice and wasted money on products that didn't work, Sahana realized the curly hair community needed something different. CurlWise combines her personal experience with cutting-edge technology to solve the problems we've all faced.</p>
+                </div>
+                
+                <div class="story-card">
+                    <h3>Science Meets Self-Care</h3>
+                    <p>We believe hair care should be both effective and nurturing. Our AI doesn't just analyze - it understands your unique curl pattern, porosity, and condition using computer vision trained on thousands of diverse hair samples, then provides gentle, science-backed recommendations that honor your hair's natural beauty.</p>
+                </div>
+                
+                <div class="story-card">
+                    <h3>Accessible & Inclusive</h3>
+                    <p>Beautiful, healthy hair shouldn't depend on your budget or background. Our platform is completely free to use, with affordable product recommendations, DIY recipes using kitchen ingredients, and guidance in multiple languages. We're building for everyone - from tight coils to loose waves, all ethnicities, all income levels, everywhere in the world.</p>
+                </div>
+                
+                <div class="story-card">
+                    <h3>Community First</h3>
+                    <p>Hair is personal, and so is our approach. We're building more than an app - we're creating a supportive community where people can share their curl journeys, connect with others who have similar hair, and celebrate the beauty of natural texture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Section -->
+    <section class="content-section" id="science">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Science Behind Healthy Curls</h2>
+                <p>Implementing AI technology and understanding the science of hair to deliver personalized, effective, and accessible care</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🧬</div>
+                    <h3>Computer Vision AI</h3>
+                    <p>Our neural networks analyze thousands of data points in your photo to identify curl patterns, density, and texture characteristics with 95% accuracy using deep learning algorithms.</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🔬</div>
+                    <h3>Porosity Analysis</h3>
+                    <p>Advanced algorithms examine how light reflects off your hair strands to determine porosity levels, moisture retention patterns, and cuticle health.</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">📊</div>
+                    <h3>Damage Assessment</h3>
+                    <p>Machine learning models trained on dermatologist-verified hair samples identify areas of damage, dryness, and breakage to recommend targeted treatments.</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <h3>Personalized Matching</h3>
+                    <p>Our recommendation engine considers your lifestyle, budget, climate, and hair goals to suggest products and routines scientifically matched to your needs.</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🌿</div>
+                    <h3>Hair Science & Formulation</h3>
+                    <p>We understand curl structure, porosity science, and ingredient interactions to recommend products with clean, nourishing ingredients that support long-term hair health.</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🌍</div>
+                    <h3>Inclusive Dataset</h3>
+                    <p>Trained on the most diverse hair dataset ever assembled, ensuring accurate analysis across all curl types, textures, ethnicities, and ages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="content-section" id="coming-soon">
+        <div class="container">
+            <div class="section-header">
+                <h2>Coming Soon</h2>
+                <p>We're expanding the CurlWise family with products and resources designed with love for the curl community</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+                <!-- CurlWise Product Line -->
+                <div style="background: linear-gradient(135deg, #f3e8ff, #e8d5ff); padding: 3rem; border-radius: 25px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; background: linear-gradient(45deg, #fbbf24, #f59e0b); color: white; padding: 0.5rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transform: rotate(15deg);">
+                        2025
+                    </div>
+                    
+                    <div style="font-size: 4rem; margin-bottom: 2rem;">🧴✨</div>
+                    <h3 style="color: #6b21a8; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-size: 2rem;">CurlWise Natural Hair Care Line</h3>
+                    <p style="color: #7c2d92; margin-bottom: 2rem; font-size: 1.1rem;">Our own line of clean, science-backed products formulated specifically for textured hair. Every ingredient chosen with purpose, every formula tested by real people with real curls.</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.7); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <h4 style="color: #7c3aed; margin-bottom: 1rem;">What's Coming:</h4>
+                        <ul style="color: #6b21a8; text-align: left; padding-left: 1rem;">
+                            <li style="margin-bottom: 0.5rem;">🌿 Curl-type specific cleansers (sulfate-free, gentle formulas)</li>
+                            <li style="margin-bottom: 0.5rem;">💧 Porosity-matched leave-in conditioners</li>
+                            <li style="margin-bottom: 0.5rem;">✨ Climate-adaptive styling creams and gels</li>
+                            <li style="margin-bottom: 0.5rem;">🌱 DIY ingredient kits for kitchen curl care</li>
+                            <li style="margin-bottom: 0.5rem;">🎯 Damage repair treatments for transitioning hair</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(124, 58, 237, 0.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #a855f7;">
+                        <p style="color: #6b21a8; margin: 0; font-style: italic; font-size: 0.95rem;">
+                            <strong>Our Promise:</strong> No harmful sulfates, parabens, or drying alcohols. Every product will be accessible, effective, and celebrating the beauty of natural texture.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Children's Picture Book -->
+                <div style="background: linear-gradient(135deg, #fef3c7, #fbbf24); padding: 3rem; border-radius: 25px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; background: linear-gradient(45deg, #ec4899, #be185d); color: white; padding: 0.5rem 2rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transform: rotate(15deg);">
+                        2025
+                    </div>
+                    
+                    <div style="font-size: 4rem; margin-bottom: 2rem;">📚🌀</div>
+                    <h3 style="color: #92400e; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-size: 2rem;">"My Very Curly Hair" Children's Book</h3>
+                    <p style="color: #b45309; margin-bottom: 2rem; font-size: 1.1rem;">A tender and empowering story about Lila, whose wild and wonderful hair has a mind of its own. Perfect for children with textured hair and the families who love them.</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.8); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <h4 style="color: #b45309; margin-bottom: 1rem;">Lila's Story:</h4>
+                        <p style="color: #92400e; text-align: left; font-size: 0.95rem; line-height: 1.6; font-style: italic;">
+                            "Lila's hair simply can't be combed. It whooshes, wiggles, knots, and *shouts*. It tangles during haircuts, pops out of clips, and always seems to have a mind of its own. She's spent a long time trying to tame it… Until one day, something changes."
+                        </p>
+                        <p style="color: #92400e; text-align: left; font-size: 0.95rem; line-height: 1.6; margin-top: 1rem;">
+                            In this joyful celebration of curls and confidence, Lila discovers that what makes her hair different might be what makes it *beautiful*. A heartfelt story about learning to love yourself just the way you are.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.8); padding: 1.5rem; border-radius: 15px; margin-bottom: 2rem;">
+                        <h4 style="color: #b45309; margin-bottom: 1rem;">Special Features:</h4>
+                        <ul style="color: #92400e; text-align: left; padding-left: 1rem; font-size: 0.95rem;">
+                            <li style="margin-bottom: 0.5rem;">💕 <strong>Celebrates Self-Love</strong> — A heartfelt story about learning to love your natural hair and everything that makes you unique</li>
+                            <li style="margin-bottom: 0.5rem;">🌀 <strong>Hair Representation</strong> — Features a curly-haired protagonist that kids with textured hair can see themselves in</li>
+                            <li style="margin-bottom: 0.5rem;">🖍️ <strong>"Draw Yourself Page"</strong> — Interactive end-page activity: "Now draw YOU with your wild, twisty, poofy, perfect hair"</li>
+                            <li style="margin-bottom: 0.5rem;">📱 <strong>Digital Extras</strong> — Downloadable PDF activities available on author website</li>
+                            <li style="margin-bottom: 0.5rem;">👨‍👩‍👧 <strong>Family Discussion Guide</strong> — Help parents talk about self-acceptance and natural beauty</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(236, 72, 153, 0.1); padding: 1.5rem; border-radius: 15px; border-left: 4px solid #ec4899;">
+                        <p style="color: #92400e; margin: 0; font-style: italic; font-size: 0.95rem;">
+                            <strong>Our Mission:</strong> Every child with curly hair deserves to see themselves as the hero of their own story. Lila's journey from frustration to self-love mirrors the real experiences of so many curly kids - and shows them they're not alone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Waitlist Signup -->
+            <div style="background: linear-gradient(135deg, #7c3aed, #a855f7); padding: 3rem; border-radius: 25px; text-align: center; color: white;">
+                <h3 style="margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-size: 2.5rem;">Be the First to Know! 🌟</h3>
+                <p style="margin-bottom: 2.5rem; opacity: 0.95; font-size: 1.1rem;">Join our waitlist to get early access to CurlWise products and be notified when "My Crown of Curls" launches. Plus, waitlist members get exclusive previews and special launch pricing!</p>
+                
+                <div style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    <input type="email" placeholder="Enter your email address" style="flex: 1; min-width: 250px; padding: 1rem 1.5rem; border: none; border-radius: 50px; font-size: 1rem; outline: none;">
+                    <button style="background: rgba(255, 255, 255, 0.9); color: #7c3aed; border: none; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;" onmouseover="this.style.background='white'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='translateY(0)'">
+                        Join Waitlist ✨
+                    </button>
+                </div>
+                
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">No spam, just curl love. Unsubscribe anytime. 💜</p>
+            </div>
+
+            <!-- Timeline -->
+            <div style="margin-top: 4rem; background: rgba(255, 255, 255, 0.8); padding: 3rem; border-radius: 25px;">
+                <h3 style="text-align: center; color: #6b21a8; margin-bottom: 3rem; font-family: 'Playfair Display', serif; font-size: 2rem;">Our 2025 Roadmap 🗺️</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f3e8ff, #e8d5ff); border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">🌱</div>
+                        <h4 style="color: #7c3aed; margin-bottom: 0.5rem;">Q1 2025</h4>
+                        <p style="color: #6b21a8; font-size: 0.9rem;">Product formulation & testing</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #fef3c7, #fbbf24); border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
+                        <h4 style="color: #b45309; margin-bottom: 0.5rem;">Q2 2025</h4>
+                        <p style="color: #92400e; font-size: 0.9rem;">"My Crown of Curls" book launch</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #d1fae5, #10b981); border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">🧴</div>
+                        <h4 style="color: #047857; margin-bottom: 0.5rem;">Q3 2025</h4>
+                        <p style="color: #065f46; font-size: 0.9rem;">CurlWise product line debut</p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #fce7f3, #ec4899); border-radius: 15px;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">🌍</div>
+                        <h4 style="color: #be185d; margin-bottom: 0.5rem;">Q4 2025</h4>
+                        <p style="color: #831843; font-size: 0.9rem;">Global community launch</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Empowering Your Curl Journey</h3>
+                <p>CurlWise © 2025 - Made with 💜 for the curl community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // In-memory user storage (for demo - in production, use backend database)
+        let users = {};
+        let currentUser = null;
+
+        // Authentication Functions
+        function openAuthModal() {
+            document.getElementById('authModal').style.display = 'block';
+            showSignIn();
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function showSignIn() {
+            document.getElementById('signInForm').style.display = 'block';
+            document.getElementById('signUpForm').style.display = 'none';
+        }
+
+        function showSignUp() {
+            document.getElementById('signInForm').style.display = 'none';
+            document.getElementById('signUpForm').style.display = 'block';
+        }
+
+        function signUp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('signUpName').value;
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPassword').value;
+            
+            // Check if user already exists
+            if (users[email]) {
+                alert('An account with this email already exists! Please sign in instead.');
+                return;
+            }
+            
+            // Create new user (in production, hash the password!)
+            users[email] = {
+                name: name,
+                email: email,
+                password: password, // In production: hash this!
+                curlDNAResults: null,
+                joinDate: new Date().toISOString()
+            };
+            
+            // Sign them in automatically
+            currentUser = users[email];
+            updateUIForSignedInUser();
+            closeAuthModal();
+            
+            alert(`Welcome to CurlWise, ${name}! 🌟 Your account has been created.`);
+        }
+
+        function signIn(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+            
+            // Check if user exists and password matches
+            if (!users[email]) {
+                alert('No account found with this email. Please create an account first!');
+                return;
+            }
+            
+            if (users[email].password !== password) {
+                alert('Incorrect password. Please try again!');
+                return;
+            }
+            
+            // Sign them in
+            currentUser = users[email];
+            updateUIForSignedInUser();
+            closeAuthModal();
+            
+            alert(`Welcome back, ${currentUser.name}! 💜`);
+        }
+
+        function signOut() {
+            currentUser = null;
+            updateUIForSignedOutUser();
+            alert('You have been signed out. Come back soon! 👋');
+        }
+
+        function updateUIForSignedInUser() {
+            // Hide sign in button, show user menu
+            document.getElementById('authButton').style.display = 'none';
+            document.getElementById('userMenu').style.display = 'block';
+            
+            // Update user info in menu
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userAvatar').textContent = getInitials(currentUser.name);
+            
+            // If user has saved curl DNA results, show them
+            if (currentUser.curlDNAResults) {
+                showSavedMessage();
+            }
+        }
+
+        function updateUIForSignedOutUser() {
+            // Show sign in button, hide user menu
+            document.getElementById('authButton').style.display = 'block';
+            document.getElementById('userMenu').style.display = 'none';
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+
+        function viewProfile() {
+            alert(`Profile for ${currentUser.name}\n\nEmail: ${currentUser.email}\nMember since: ${new Date(currentUser.joinDate).toLocaleDateString()}\n\nProfile management coming soon! 🌟`);
+        }
+
+        function viewSavedResults() {
+            if (!currentUser.curlDNAResults) {
+                alert('You haven\'t taken the Curl DNA assessment yet! Click "Discover My Curl DNA" to get started. ✨');
+                return;
+            }
+            
+            const results = currentUser.curlDNAResults;
+            alert(`Your Saved Curl DNA Results 🌀\n\nCurl Pattern: ${results.curlPattern}\nMain Goal: ${results.goals}\nTime Style: ${results.timeCommitment}\nClimate: ${results.climate}\n\nYour personalized routine and products are saved! 💜`);
+        }
+
+        function settings() {
+            alert('Settings page coming soon! 🔧\n\nYou\'ll be able to:\n• Update your profile\n• Change notification preferences\n• Manage your curl journey\n• Export your data');
+        }
+
+        function showSavedMessage() {
+            // Add a subtle indicator that user has saved results
+            const analyzeBtn = document.querySelector('.analyze-btn');
+            if (analyzeBtn && currentUser.curlDNAResults) {
+                analyzeBtn.innerHTML = 'Retake My Curl DNA ✨ (Previous results saved)';
+            }
+        }
+
+        // Modified Curl DNA Analysis System to save results for signed-in users
+        document.getElementById('curlDnaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('questionnaire').style.opacity = '0.5';
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const curlDNA = {
+                age: formData.get('age'),
+                feelings: formData.get('feelings'),
+                goals: formData.get('goals'),
+                timeCommitment: formData.get('timeCommitment'),
+                climate: formData.get('climate'),
+                budget: formData.get('budget'),
+                curlPattern: formData.get('curlPattern'),
+                completedDate: new Date().toISOString()
+            };
+            
+            // Save results for signed-in users
+            if (currentUser) {
+                currentUser.curlDNAResults = curlDNA;
+                console.log('Curl DNA results saved for user:', currentUser.email);
+            }
+            
+            // Simulate analysis time
+            setTimeout(() => {
+                displayResults(curlDNA);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('questionnaire').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+                
+                // Show save message for signed-in users
+                if (currentUser) {
+                    const saveMessage = document.createElement('div');
+                    saveMessage.style.cssText = `
+                        background: linear-gradient(135deg, #10b981, #059669);
+                        color: white;
+                        padding: 1rem;
+                        border-radius: 15px;
+                        margin-bottom: 2rem;
+                        text-align: center;
+                        font-weight: 600;
+                    `;
+                    saveMessage.innerHTML = '✅ Your Curl DNA results have been saved to your account! You can view them anytime from your profile menu.';
+                    document.getElementById('results').firstElementChild.insertBefore(saveMessage, document.getElementById('results').firstElementChild.firstElementChild);
+                }
+                
+                // Smooth scroll to results
+                document.getElementById('results').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 3000);
+        });
+
+        function displayResults(dna) {
+            const personalMessage = getPersonalMessage(dna.age, dna.feelings);
+            const routine = getRoutine(dna.curlPattern, dna.timeCommitment, dna.climate);
+            const products = getProducts(dna.budget, dna.curlPattern);
+            const affirmations = getAffirmations(dna.age, dna.feelings);
+            
+            document.getElementById('results').innerHTML = `
+                <div class="results-container">
+                    <h3 style="text-align: center; color: #7c3aed; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 2.5rem;">Your Unique Curl DNA ✨</h3>
+                    
+                    <div style="background: linear-gradient(135deg, #f3e8ff, #e8d5ff); padding: 2.5rem; border-radius: 20px; margin-bottom: 3rem; text-align: center;">
+                        <h4 style="color: #6b21a8; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-size: 1.5rem;">A Message Just for You 💜</h4>
+                        <p style="color: #6b21a8; font-size: 1.1rem; line-height: 1.7; margin: 0;">${personalMessage}</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                        <div style="background: rgba(168, 85, 247, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                            <h4 style="color: #7c3aed; margin-bottom: 0.5rem;">🌀 Curl Pattern</h4>
+                            <div style="font-size: 1.1rem; font-weight: 600; color: #6b21a8;">${dna.curlPattern}</div>
+                        </div>
+                        <div style="background: rgba(168, 85, 247, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                            <h4 style="color: #7c3aed; margin-bottom: 0.5rem;">🎯 Main Goal</h4>
+                            <div style="font-size: 1.1rem; font-weight: 600; color: #6b21a8;">${dna.goals.replace('-', ' ').replace(/\\b\\w/g, l => l.toUpperCase())}</div>
+                        </div>
+                        <div style="background: rgba(168, 85, 247, 0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                            <h4 style="color: #7c3aed; margin-bottom: 0.5rem;">⏰ Time Style</h4>
+                            <div style="font-size: 1.1rem; font-weight: 600; color: #6b21a8;">${dna.timeCommitment.charAt(0).toUpperCase() + dna.timeCommitment.slice(1)}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #d1fae5, #10b981); padding: 2.5rem; border-radius: 20px; margin-bottom: 3rem;">
+                        <h3 style="color: #065f46; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 1.8rem; text-align: center;">Your Personal Care Routine 🌿</h3>
+                        <div style="background: rgba(255, 255, 255, 0.9); padding: 2rem; border-radius: 15px;">
+                            <p style="color: #065f46; margin-bottom: 1rem;"><strong>Wash Schedule:</strong> ${routine.wash}</p>
+                            <p style="color: #065f46; margin-bottom: 1rem;"><strong>Styling Method:</strong> ${routine.styling}</p>
+                            <p style="color: #065f46; margin: 0;"><strong>Climate Care:</strong> ${routine.climate}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #fef3c7, #fbbf24); padding: 2.5rem; border-radius: 20px; margin-bottom: 3rem;">
+                        <h3 style="color: #92400e; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 1.8rem; text-align: center;">Products Chosen for You 🛍️</h3>
+                        <div style="background: rgba(255, 255, 255, 0.8); padding: 2rem; border-radius: 15px;">
+                            <h4 style="color: #b45309; margin-bottom: 1.5rem;">Recommended Products:</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                ${products.map(product => 
+                                    `<div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 10px; text-align: center;">
+                                        <span style="color: #92400e; font-weight: 600;">${product}</span>
+                                    </div>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #fce7f3, #ec4899); padding: 2.5rem; border-radius: 20px; margin-bottom: 3rem;">
+                        <h3 style="color: #be185d; margin-bottom: 2rem; font-family: 'Playfair Display', serif; font-size: 1.8rem; text-align: center;">Your Daily Affirmations 💖</h3>
+                        <div style="background: rgba(255, 255, 255, 0.9); padding: 2rem; border-radius: 15px;">
+                            <ul style="color: #831843; margin: 0; padding-left: 1rem;">
+                                ${affirmations.map(affirmation => `<li style="margin-bottom: 0.5rem;">${affirmation}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; background: linear-gradient(135deg, #7c3aed, #a855f7); padding: 2.5rem; border-radius: 20px; color: white;">
+                        <h3 style="margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">Your Curl Journey Starts Now! 🌟</h3>
+                        <p style="margin-bottom: 2rem; opacity: 0.9;">You are beautiful, your curls are beautiful, and this journey is yours to own. 💜</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="window.print()" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+                                📄 Save My Results
+                            </button>
+                            <button onclick="location.reload()" style="background: white; color: #7c3aed; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+                                🔄 Take Again
+                            </button>
+                            ${!currentUser ? `
+                            <button onclick="openAuthModal()" style="background: rgba(16, 185, 129, 0.9); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+                                💾 Create Account to Save
+                            </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getPersonalMessage(age, feelings) {
+            let tone = "";
+            let message = "";
+            
+            if (age === 'teen') {
+                tone = "Hey beautiful! 💕 You're at such an amazing time to embrace your natural texture. ";
+            } else if (age === 'young-adult') {
+                tone = "You're in a powerful phase of defining who you are - and your curls are part of that journey! ";
+            } else if (age === 'parent') {
+                tone = "What a gift to help your child love their natural hair from the start. ";
+            } else {
+                tone = "Your curl journey is uniquely yours, and it's never too late to fall in love with your natural texture. ";
+            }
+
+            if (feelings === 'frustrated') {
+                message = tone + "I hear you - curl frustration is SO real. But here's the thing: your hair isn't the problem, it's just been waiting for the right approach. Let's find what works for YOU.";
+            } else if (feelings === 'learning-to-love') {
+                message = tone + "This transition from fighting your curls to loving them is one of the most beautiful journeys. You're doing something brave and powerful by choosing to embrace your natural self.";
+            } else if (feelings === 'new-to-natural') {
+                message = tone + "Welcome to your natural hair journey! This is a big step, and it takes courage to undo years of damage and start fresh. You're worth this investment in yourself.";
+            } else if (feelings === 'confused') {
+                message = tone + "The confusion is totally normal - curly hair can feel like a mystery! But every curl has its own language, and we're going to help you learn to speak yours fluently.";
+            } else {
+                message = tone + "Your love for your curls is absolutely beautiful! Let's help you enhance what you already adore about your natural texture.";
+            }
+
+            return message;
+        }
+
+        function getRoutine(curlPattern, timeCommitment, climate) {
+            const routines = {
+                wash: {
+                    '2A-2B': 'Every 2-3 days with lightweight shampoo',
+                    '2C-3A': 'Every 3-5 days, co-wash focus',
+                    '3B-3C': 'Every 7-10 days, gentle cleansing',
+                    '4A-4C': 'Every 10-14 days, scalp focus'
+                },
+                styling: {
+                    minimal: {
+                        '2A-2B': 'Light mousse, scrunch, air dry',
+                        '2C-3A': 'Leave-in + gel, scrunch, go',
+                        '3B-3C': 'Cream + gel on wet hair, air dry',
+                        '4A-4C': 'LOC method, protective styles'
+                    },
+                    moderate: {
+                        '2A-2B': 'Mousse + diffusing with plopping',
+                        '2C-3A': 'Section styling, plop, diffuse',
+                        '3B-3C': 'Detailed sectioning, gentle diffusing',
+                        '4A-4C': 'Wash and go with sectioning'
+                    },
+                    detailed: {
+                        '2A-2B': 'Root clipping, detailed diffusing',
+                        '2C-3A': 'Finger coiling, product cocktails',
+                        '3B-3C': 'Shingling method, hover diffusing',
+                        '4A-4C': 'Detailed wash and go or protective styling'
+                    }
+                },
+                climate: {
+                    humid: 'Strong hold gels, anti-humectants',
+                    dry: 'Heavy moisture, humectants, oils',
+                    temperate: 'Balanced routine, seasonal adjustments',
+                    cold: 'Deep moisturizing, protective styles'
+                }
+            };
+            
+            return {
+                wash: routines.wash[curlPattern],
+                styling: routines.styling[timeCommitment][curlPattern],
+                climate: routines.climate[climate]
+            };
+        }
+
+        function getProducts(budget, curlPattern) {
+            const productDB = {
+                low: ['LA Looks Gel ($2)', 'VO5 Conditioner ($3)', 'Aussie Mousse ($4)', 'DIY Flax Seed Gel'],
+                medium: ['SheaMoisture ($8-15)', 'Cantu ($6-12)', 'DevaCurl ($15-25)', 'Maui Moisture ($8-12)'],
+                high: ['Ouidad ($24-35)', 'Pattern ($20-30)', 'Moroccanoil ($30-45)', 'Briogeo ($28-42)']
+            };
+            
+            return productDB[budget] || productDB.medium;
+        }
+
+        function getAffirmations(age, feelings) {
+            const affirmations = {
+                teen: [
+                    "Your curls are part of what makes you uniquely beautiful 💕",
+                    "You don't need to change your hair to fit in - you're perfect as you are",
+                    "Learning to love your natural texture is a superpower"
+                ],
+                'young-adult': [
+                    "Your curl journey is part of your self-discovery",
+                    "Embracing your natural texture is an act of self-love",
+                    "You're building a relationship with your authentic self"
+                ],
+                parent: [
+                    "You're giving your child the gift of curl confidence",
+                    "Teaching curl love early creates lifelong self-acceptance",
+                    "You're breaking generational cycles of texture shame"
+                ]
+            };
+            
+            const journeyAffirmations = {
+                'frustrated': [
+                    "Your frustration is valid, and it's not your fault",
+                    "Every curl expert started exactly where you are now",
+                    "Progress, not perfection, is the goal"
+                ],
+                'learning-to-love': [
+                    "This journey takes time, and that's perfectly okay",
+                    "Every day you choose your natural texture is an act of courage",
+                    "You're unlearning years of messaging - be patient with yourself"
+                ],
+                'new-to-natural': [
+                    "Welcome to one of the most rewarding journeys you'll take",
+                    "Your hair is resilient and ready to bounce back",
+                    "This transition period is temporary, but the confidence is permanent"
+                ]
+            };
+            
+            const base = affirmations[age] || affirmations['young-adult'];
+            const journey = journeyAffirmations[feelings] || ["You're exactly where you need to be in your curl journey"];
+            
+            return [...base, ...journey];
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('authModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAuthModal();
+            }
+        });
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const userMenu = document.getElementById('userMenu');
+            const authButton = document.getElementById('authButton');
+            
+            if (!userMenu.contains(e.target) && !authButton.contains(e.target)) {
+                // Don't close if clicking on the menu itself
+                if (e.target.closest('#userMenu')) return;
+            }
+        });
+
+        // Smooth animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.story-card, .tech-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
